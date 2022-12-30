@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strings"
 
 	"github.com/juanfont/headscale"
 	"github.com/rs/zerolog"
@@ -71,14 +72,14 @@ func initConfig() {
 		if (runtime.GOOS == "linux" || runtime.GOOS == "darwin") &&
 			Version != "dev" {
 			githubTag := &latest.GithubTag{
-				Owner:      "juanfont",
-				Repository: "headscale",
+				Owner:      strings.Split(RepositoryURL, ",")[len(strings.Split(RepositoryURL, "/"))-2],
+				Repository: strings.Split(RepositoryURL, ",")[len(strings.Split(RepositoryURL, "/"))-1],
 			}
 			res, err := latest.Check(githubTag, Version)
 			if err == nil && res.Outdated {
 				//nolint
 				fmt.Printf(
-					"An updated version of Headscale has been found (%s vs. your current %s). Check it out https://github.com/juanfont/headscale/releases\n",
+					"An updated version of Headscale has been found (%s vs. your current %s). Check it out https://github.com/"+githubTag.Owner+"/"+githubTag.Repository+"/releases\n",
 					res.Current,
 					Version,
 				)
@@ -101,7 +102,8 @@ var rootCmd = &cobra.Command{
 	Short: hs + " - a Tailscale control server",
 	Long: `
 ` + hs + ` is ` + HelpMessage + `
-
+` + strings.Split(RepositoryURL, ",")[len(strings.Split(RepositoryURL, "/"))-2] + `
+` + strings.Split(RepositoryURL, ",")[len(strings.Split(RepositoryURL, "/"))-1] + `
 ` + RepositoryURL,
 }
 
