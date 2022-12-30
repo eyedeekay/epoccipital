@@ -40,7 +40,7 @@ func init() {
 
 var preauthkeysCmd = &cobra.Command{
 	Use:     "preauthkeys",
-	Short:   "Handle the preauthkeys in Headscale",
+	Short:   "Handle the preauthkeys in " + hs + "",
 	Aliases: []string{"preauthkey", "authkey", "pre"},
 }
 

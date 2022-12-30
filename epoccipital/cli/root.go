@@ -3,6 +3,7 @@ package cli
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"runtime"
 
 	"github.com/juanfont/headscale"
@@ -25,7 +26,10 @@ func init() {
 	rootCmd.PersistentFlags().
 		StringP("output", "o", "", "Output format. Empty for human-readable, 'json', 'json-line' or 'yaml'")
 	rootCmd.PersistentFlags().
+		StringP("samaddr", "s", "127.0.0.1:7656", "Address of the SAMv3 API for I2P")
+	rootCmd.PersistentFlags().
 		Bool("force", false, "Disable prompts and forces the execution")
+	rootCmd.PersistentFlags().StringP("tunname", "n", hs, "Name to use for the I2P tunnel")
 }
 
 func initConfig() {
@@ -83,16 +87,29 @@ func initConfig() {
 	}
 }
 
-var rootCmd = &cobra.Command{
-	Use:   "headscale",
-	Short: "headscale - a Tailscale control server",
-	Long: `
-headscale is an open source implementation of the Tailscale control server
+func Executable() (string, error) {
+	hs, exeerr := os.Executable()
+	return filepath.Base(hs), exeerr
+}
 
-https://github.com/juanfont/headscale`,
+var hs, exeerr = Executable()
+
+var HelpMessage string = "is an I2P-Hosted Tailscale control server based on the Open-Source Headscale server"
+var RepositoryURL string = "https://github.com/eyedeekay/epoccipital"
+var rootCmd = &cobra.Command{
+	Use:   hs,
+	Short: hs + " - a Tailscale control server",
+	Long: `
+` + hs + ` is ` + HelpMessage + `
+
+` + RepositoryURL,
 }
 
 func Execute() {
+	if exeerr != nil {
+		fmt.Fprintln(os.Stderr, exeerr)
+		os.Exit(1)
+	}
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

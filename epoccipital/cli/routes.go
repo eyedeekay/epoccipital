@@ -37,7 +37,7 @@ func init() {
 
 var routesCmd = &cobra.Command{
 	Use:     "routes",
-	Short:   "Manage the routes of Headscale",
+	Short:   "Manage the routes of " + hs + "",
 	Aliases: []string{"r", "route"},
 }
 

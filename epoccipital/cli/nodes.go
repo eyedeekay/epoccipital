@@ -84,7 +84,7 @@ func init() {
 
 var nodeCmd = &cobra.Command{
 	Use:     "nodes",
-	Short:   "Manage the nodes of Headscale",
+	Short:   "Manage the nodes of " + hs + "",
 	Aliases: []string{"node", "machine", "machines"},
 }
 

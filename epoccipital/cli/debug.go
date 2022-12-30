@@ -46,7 +46,7 @@ func init() {
 var debugCmd = &cobra.Command{
 	Use:   "debug",
 	Short: "debug and testing commands",
-	Long:  "debug contains extra commands used for debugging and testing headscale",
+	Long:  "debug contains extra commands used for debugging and testing " + hs,
 }
 
 var createNodeCmd = &cobra.Command{

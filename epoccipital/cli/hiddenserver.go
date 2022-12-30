@@ -18,7 +18,7 @@ func init() {
 
 var hiddenServeCmd = &cobra.Command{
 	Use:   "hiddenserve",
-	Short: "Launches the headscale server as a hidden(I2P) service",
+	Short: "Launches the " + hs + " server as a hidden(I2P) service",
 	Args: func(cmd *cobra.Command, args []string) error {
 		return nil
 	},
@@ -27,7 +27,11 @@ var hiddenServeCmd = &cobra.Command{
 		if err != nil {
 			log.Fatal().Caller().Err(err).Msg("Error initializing")
 		}
-		garlic, err := onramp.NewGarlic("headscale", "127.0.0.1:7656", sam3.Options_Wide)
+		samaddr, err := cmd.Flags().GetString("samaddr")
+		if err != nil {
+			log.Fatal().Caller().Err(err).Msg("Error initializing SAMv3 Address")
+		}
+		garlic, err := onramp.NewGarlic(hs, samaddr, sam3.Options_Wide)
 		if err != nil {
 			log.Fatal().Caller().Err(err).Msg("Error initializing SAMv3 API")
 		}

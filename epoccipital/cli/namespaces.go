@@ -26,7 +26,7 @@ const (
 
 var namespaceCmd = &cobra.Command{
 	Use:     "namespaces",
-	Short:   "Manage the namespaces of Headscale",
+	Short:   "Manage the namespaces of " + hs + "",
 	Aliases: []string{"namespace", "ns", "user", "users"},
 }
 

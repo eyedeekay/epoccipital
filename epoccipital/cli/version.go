@@ -13,7 +13,7 @@ func init() {
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print the version.",
-	Long:  "The version of headscale.",
+	Long:  "The version of " + hs + ".",
 	Run: func(cmd *cobra.Command, args []string) {
 		output, _ := cmd.Flags().GetString("output")
 		SuccessOutput(map[string]string{"version": Version}, Version, output)

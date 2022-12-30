@@ -38,13 +38,13 @@ func init() {
 
 var apiKeysCmd = &cobra.Command{
 	Use:     "apikeys",
-	Short:   "Handle the Api keys in Headscale",
+	Short:   "Handle the Api keys in " + hs + "",
 	Aliases: []string{"apikey", "api"},
 }
 
 var listAPIKeys = &cobra.Command{
 	Use:     "list",
-	Short:   "List the Api keys for headscale",
+	Short:   "List the Api keys for " + hs + "",
 	Aliases: []string{"ls", "show"},
 	Run: func(cmd *cobra.Command, args []string) {
 		output, _ := cmd.Flags().GetString("output")
