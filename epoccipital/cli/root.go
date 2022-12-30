@@ -72,8 +72,8 @@ func initConfig() {
 		if (runtime.GOOS == "linux" || runtime.GOOS == "darwin") &&
 			Version != "dev" {
 			githubTag := &latest.GithubTag{
-				Owner:      strings.Split(RepositoryURL, ",")[len(strings.Split(RepositoryURL, "/"))-2],
-				Repository: strings.Split(RepositoryURL, ",")[len(strings.Split(RepositoryURL, "/"))-1],
+				Owner:      strings.Split(RepositoryURL, "/")[len(strings.Split(RepositoryURL, "/"))-2],
+				Repository: strings.Split(RepositoryURL, "/")[len(strings.Split(RepositoryURL, "/"))-1],
 			}
 			res, err := latest.Check(githubTag, Version)
 			if err == nil && res.Outdated {
@@ -102,8 +102,8 @@ var rootCmd = &cobra.Command{
 	Short: hs + " - a Tailscale control server",
 	Long: `
 ` + hs + ` is ` + HelpMessage + `
-` + strings.Split(RepositoryURL, ",")[len(strings.Split(RepositoryURL, "/"))-2] + `
-` + strings.Split(RepositoryURL, ",")[len(strings.Split(RepositoryURL, "/"))-1] + `
+
+Variant created by:` + strings.Split(RepositoryURL, "/")[len(strings.Split(RepositoryURL, "/"))-2] + `
 ` + RepositoryURL,
 }
 
