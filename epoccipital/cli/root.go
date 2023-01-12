@@ -96,7 +96,7 @@ func Executable() (string, error) {
 var hs, exeerr = Executable()
 
 var HelpMessage string = "is an I2P-Hosted Tailscale control server based on the Open-Source Headscale server"
-var RepositoryURL string = "https://github.com/eyedeekay/epoccipital"
+var RepositoryURL string = `https://github.com/eyedeekay/epoccipital`
 var rootCmd = &cobra.Command{
 	Use:   hs,
 	Short: hs + " - a Tailscale control server",

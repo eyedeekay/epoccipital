@@ -130,4 +130,8 @@ require (
 	nhooyr.io/websocket v1.8.7 // indirect
 )
 
+
+// NOTE: For now this requires my fork of Headscale to build.
+// You can check it out with:
+// `git clone https://github.com/eyedeekay/headscale -b i2p-listeners "$HOME/go/src/github.com/eyedeekay/headscale"`
 replace github.com/juanfont/headscale => ../../eyedeekay/headscale
